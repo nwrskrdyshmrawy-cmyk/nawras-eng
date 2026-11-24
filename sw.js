@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nawras-suite-v3.2';
+const CACHE_NAME = 'nawras-suite-v4.1';
 const ASSETS = [
   './',
   './index.html',
