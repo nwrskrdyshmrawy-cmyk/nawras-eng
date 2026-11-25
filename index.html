@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>منصة المهندس نورس كرديش معراوي الهندسية — V5.0</title>
+  <title>منصة المهندس نورس كرديش معراوي الهندسية — V5.1</title>
   <meta name="theme-color" content="#1e2c3a">
   <meta name="description" content="المنصة الهندسية المتكاملة للمهندس نورس كرديش معراوي — أدوات الدراسة الأولية وتفريد التسليح والمحاضرات الهندسية">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -141,7 +141,7 @@
       background: #fff; padding: 3px; border: 2px solid var(--gold);
     }
 
-    /* ============ LOCK / REGISTRATION GATE (V5.0 GLASS) ============ */
+    /* ============ LOCK / REGISTRATION GATE (V5.1 GLASS) ============ */
     #lock-screen {
       position: fixed; inset: 0; z-index: 9999;
       background: radial-gradient(circle at 20% 15%, var(--brand-dark, #16222e), #050a12 78%);
@@ -362,7 +362,7 @@
     .view { display: none; }
     .view.active { display: block; animation: cardRise 0.3s ease-out; }
 
-    /* ============ HERO BANNER (V5.0 LUXURY) ============ */
+    /* ============ HERO BANNER (V5.1 LUXURY) ============ */
     .hero-banner {
       position: relative; overflow: hidden;
       background: linear-gradient(135deg, var(--brand, #1e2c3a) 0%, var(--brand-darker, #0b121c) 100%);
@@ -510,7 +510,7 @@
       .hero-banner { padding: 18px; }
     }
   
-    /* === V5.0 Launch Edition: Pure White Accents, Smooth Animations & Bird Wings Splash === */
+    /* === V5.1 Launch Edition: Pure White Accents, Smooth Animations & Bird Wings Splash === */
     #intro-splash {
       position: fixed; inset: 0; z-index: 100000;
       background: radial-gradient(circle at 50% 44%, #1e2c3a 0%, #0b1220 74%, #050811 100%);
@@ -658,7 +658,7 @@
     .lec-tg-btn:hover { transform: scale(1.03); background: #f8fafc; }
 
 
-    /* === V5.0 Mobile RTL Centering & Anti-Overflow Lock === */
+    /* === V5.1 Mobile RTL Centering & Anti-Overflow Lock === */
     html, body {
       max-width: 100% !important; width: 100% !important;
       overflow-x: hidden !important; margin: 0; padding: 0;
@@ -690,7 +690,7 @@
     }
 
 
-    /* === V5.0 Syndicate Launch: Solid Mobile Sidebar, Swipe Backdrop & Universal Theme Vars === */
+    /* === V5.1 Syndicate Launch: Solid Mobile Sidebar, Swipe Backdrop & Universal Theme Vars === */
     :root {
       --brand-dark: #15212d;
       --brand-darker: #0a1019;
@@ -739,11 +739,26 @@
       border-radius: 50% !important; object-fit: contain !important; background: #ffffff !important; padding: 4px !important;
     }
 
+
+    /* === V5.1 Silky Mobile Sidebar Scroll Fix === */
+    @media (max-width: 900px) {
+      .sidebar {
+        height: 100dvh !important; max-height: 100dvh !important;
+        display: flex !important; flex-direction: column !important;
+        overflow: hidden !important;
+      }
+      .sb-nav {
+        flex: 1 1 auto !important; min-height: 0 !important;
+        overflow-y: auto !important; -webkit-overflow-scrolling: touch !important;
+        overscroll-behavior: contain !important; touch-action: pan-y !important;
+      }
+    }
+
   </style>
 </head>
 <body>
 
-  <!-- Luminous Orbital Rings Welcome Splash (V5.0 Launch Edition) -->
+  <!-- Luminous Orbital Rings Welcome Splash (V5.1 Launch Edition) -->
   <div id="intro-splash" title="اضغط للمتابعة">
     <div class="splash-aura"></div>
     <div class="splash-stage">
@@ -766,7 +781,7 @@
   <canvas id="bg-canvas"></canvas>
   <div class="ambient-glow"></div>
 
-  <!-- ============ LOCK / REGISTRATION GATE (V5.0) ============ -->
+  <!-- ============ LOCK / REGISTRATION GATE (V5.1) ============ -->
   <div id="lock-screen">
     <canvas id="lock-canvas"></canvas>
     <div class="lock-card">
@@ -776,7 +791,7 @@
         </div>
       </div>
       <h1>المهندس نورس كرديش معراوي</h1>
-      <div class="lock-sub">المنصة الهندسية المتكاملة — الإصدار V5.0</div>
+      <div class="lock-sub">المنصة الهندسية المتكاملة — الإصدار V5.1</div>
 
       <div class="field-group">
         <label class="reg-label" for="in-name">الاسم الثلاثي *</label>
@@ -838,7 +853,7 @@
         <div class="mini-orb"><img id="sb-logo-img" alt="الشعار"></div>
         <div class="sb-brand-txt">
           <div class="n-ar">المهندس نورس كرديش معراوي</div>
-          <div class="n-sub">المنصة الهندسية V5.0</div>
+          <div class="n-sub">المنصة الهندسية V5.1</div>
         </div>
       </div>
 
@@ -1513,7 +1528,7 @@
     const sidebar = document.getElementById('sidebar');
     const sbBackdrop = document.getElementById('sb-backdrop');
     function openSidebar()  { sidebar.classList.add('open'); if (sbBackdrop) sbBackdrop.classList.add('open'); }
-    function closeSidebar() { closeSidebar(); if (sbBackdrop) sbBackdrop.classList.remove('open'); }
+    function closeSidebar() { sidebar.classList.remove('open'); if (sbBackdrop) sbBackdrop.classList.remove('open'); }
     document.getElementById('btn-menu').addEventListener('click', () => {
       if (sidebar.classList.contains('open')) closeSidebar(); else openSidebar();
     });
@@ -1595,7 +1610,7 @@
         youtube: '#dc2626', platforms: '#0284c7', quick: '#0f766e',
         prelim: '#1e2c3a', detailing: '#7c3aed', design: '#b45309', lectures: '#0369a1', codes: '#1e40af', seismic: '#dc2626', ai_helper: '#4f46e5'
       };
-      // Home Section Cards (V5.0 Glass + Icons)
+      // Home Section Cards (V5.1 Glass + Icons)
       document.getElementById('home-sections-grid').innerHTML = MAIN_SECTIONS.map((s, idx) => {
         const cnt = s.id === 'youtube' ? APP_CONFIG.youtubePlaylists.length + ' قوائم'
           : s.id === 'platforms' ? '4 منصات'
@@ -1646,7 +1661,7 @@
     }
 
 
-    // ============ UNIVERSAL BACK BUTTON & MOBILE HISTORY STACK (V5.0) ============
+    // ============ UNIVERSAL BACK BUTTON & MOBILE HISTORY STACK (V5.1) ============
     let currentSectionId = null;
     let isPdfReaderOpenInTool = false;
     let lecState = { subsecId: null, yearId: null, semId: null, subjId: null };
@@ -2310,7 +2325,7 @@
     buildUI();
     updateProjectCounts();
 
-    // ============ V5.0 ANIMATED STRUCTURAL BLUEPRINT BACKGROUND ============
+    // ============ V5.1 ANIMATED STRUCTURAL BLUEPRINT BACKGROUND ============
     function initBlueprintCanvas(canvasId, isDarkBg) {
       const c = document.getElementById(canvasId);
       if (!c) return;
