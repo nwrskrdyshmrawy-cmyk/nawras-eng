@@ -30,11 +30,26 @@ const PORTFOLIO_DATA = {
     }
   ],
   training: [
-    {
-      title: "مشاريع تخرج وأعمال متدربي دورة ETABS & SAFE",
-      desc: "نماذج تطبيقية ومخططات تفريد تسليح من إنجاز المهندسين المتدربين خلال الدورات التأهيلية.",
-      tag: "أعمال المتدربين",
-      image: ""
+   {
+      title: "أعمال متدربي دورة ETABS",
+      desc: "نماذج تحليل وتصميم إنشائي ومخططات من إنجاز المهندسين المتدربين في دورة ETABS.",
+      tag: "أعمال المتدربين - ETABS",
+      images: [
+        "images/etabs-students/1.jpg",
+        "images/etabs-students/2.jpg",
+        "images/etabs-students/3.jpg",
+        "images/etabs-students/4.jpg",
+        "images/etabs-students/5.jpg",
+        "images/etabs-students/6.jpg",
+        "images/etabs-students/7.jpg",
+        "images/etabs-students/8.jpg",
+        "images/etabs-students/9.jpg",
+        "images/etabs-students/10.jpg",
+        "images/etabs-students/11.jpg",
+        "images/etabs-students/12.jpg",
+        "images/etabs-students/13.jpg",
+        "images/etabs-students/14.jpg"
+      ]
     },
     {
       title: "ورشة التصميم اليدوي والشوب دروينغ",
