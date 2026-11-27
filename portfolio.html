@@ -8,12 +8,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #0f5c52;
-      --primary-light: #187a6e;
+      --primary: #1e2c3a;
       --accent: #c9a24b;
-      --bg: #f3f7f6;
+      --bg: #eef2f7;
       --card: #ffffff;
-      --text: #1e293b;
+      --text: #0f172a;
       --muted: #64748b;
       --border: #e2e8f0;
     }
@@ -22,7 +21,7 @@
 
     /* الشريط العلوي */
     .topbar {
-      background: linear-gradient(135deg, #0b463e, var(--primary-light));
+      background: var(--primary);
       color: #fff;
       padding: 14px 20px;
       display: flex;
@@ -31,7 +30,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
     }
     .brand { display: flex; align-items: center; gap: 12px; }
     .brand-logo {
@@ -46,14 +45,14 @@
     .brand-text h1 { font-size: 1rem; font-weight: 800; line-height: 1.3; }
     .brand-text span { font-size: 0.78rem; opacity: 0.85; }
     .back-btn {
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.16);
       color: #fff;
-      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.35);
       padding: 8px 16px;
       border-radius: 999px;
       font-size: 0.88rem;
       font-weight: 700;
-      border: 1px solid rgba(255,255,255,0.3);
+      cursor: pointer;
       transition: 0.2s;
       white-space: nowrap;
     }
@@ -69,29 +68,25 @@
       display: flex;
       align-items: center;
       gap: 28px;
-      box-shadow: 0 6px 24px rgba(15, 92, 82, 0.08);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
       border: 1px solid var(--border);
       margin-bottom: 28px;
       flex-wrap: wrap;
     }
-    .profile-wrap {
-      flex-shrink: 0;
-      text-align: center;
-      margin: 0 auto;
-    }
+    .profile-wrap { flex-shrink: 0; text-align: center; margin: 0 auto; }
     .profile-img {
       width: 155px;
       height: 155px;
       border-radius: 50%;
       object-fit: cover;
       border: 4px solid var(--primary);
-      box-shadow: 0 8px 20px rgba(15, 92, 82, 0.18);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
       background: #fff;
     }
     .hero-info { flex: 1; min-width: 260px; }
     .hero-badge {
       display: inline-block;
-      background: #e6f4f1;
+      background: var(--bg);
       color: var(--primary);
       padding: 4px 12px;
       border-radius: 999px;
@@ -106,9 +101,9 @@
     /* البرامج */
     .skills-group { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
     .skill-tag {
-      background: #f1f5f9;
+      background: var(--bg);
       color: var(--primary);
-      border: 1px solid #cbd5e1;
+      border: 1px solid var(--border);
       padding: 4px 12px;
       border-radius: 8px;
       font-size: 0.82rem;
@@ -149,17 +144,12 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.03);
       transition: 0.2s;
     }
-    .service-card:hover { transform: translateY(-3px); border-color: var(--primary-light); }
+    .service-card:hover { transform: translateY(-3px); border-color: var(--primary); }
     .service-card h3 { font-size: 1.05rem; color: var(--primary); margin-bottom: 8px; font-weight: 800; }
     .service-card p { font-size: 0.88rem; color: var(--muted); }
 
     /* تبويبات معرض الأعمال */
-    .tabs {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
+    .tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
     .tab-btn {
       background: var(--card);
       border: 1px solid var(--border);
@@ -196,7 +186,7 @@
       width: 100%;
       height: 180px;
       object-fit: cover;
-      background: linear-gradient(135deg, #e6f4f1, #d5ebe6);
+      background: var(--bg);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -207,7 +197,7 @@
     .project-body { padding: 16px; flex: 1; }
     .project-tag {
       display: inline-block;
-      background: #e6f4f1;
+      background: var(--bg);
       color: var(--primary);
       font-size: 0.75rem;
       font-weight: 700;
@@ -218,12 +208,7 @@
     .project-body h3 { font-size: 1.02rem; color: var(--text); margin-bottom: 6px; font-weight: 800; }
     .project-body p { font-size: 0.86rem; color: var(--muted); }
 
-    footer {
-      text-align: center;
-      margin-top: 40px;
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
+    footer { text-align: center; margin-top: 40px; color: var(--muted); font-size: 0.85rem; }
 
     @media (max-width: 600px) {
       .hero-card { padding: 20px; text-align: center; }
@@ -242,11 +227,10 @@
         <span>للأعمال والاستشارات الهندسية</span>
       </div>
     </div>
-    <a href="index.html" class="back-btn">← العودة إلى المنصة</a>
+    <button type="button" onclick="goBack()" class="back-btn">← العودة إلى المنصة</button>
   </header>
 
   <main class="container">
-    <!-- البطاقة التعريفية -->
     <section class="hero-card">
       <div class="profile-wrap">
         <img src="images/profile.png" alt="م. نورس كرديش معراوي" class="profile-img" />
@@ -272,7 +256,6 @@
       </div>
     </section>
 
-    <!-- الخدمات -->
     <h2 class="section-title">الخدمات الهندسية</h2>
     <section class="services-grid">
       <div class="service-card">
@@ -293,7 +276,6 @@
       </div>
     </section>
 
-    <!-- معرض الأعمال -->
     <h2 class="section-title">معرض الأعمال والدورات</h2>
     <div class="tabs">
       <button class="tab-btn active" onclick="renderProjects('all', this)">الكل</button>
@@ -312,6 +294,34 @@
 
   <script src="data/portfolio.js"></script>
   <script>
+    // سحب ألوان الثيم المختار من التطبيق الرئيسي تلقائياً
+    function syncThemeFromParent() {
+      try {
+        if (window.parent && window.parent !== window) {
+          const pStyle = getComputedStyle(window.parent.document.documentElement);
+          const brand = pStyle.getPropertyValue('--brand').trim();
+          const bg = pStyle.getPropertyValue('--bg').trim();
+          const card = pStyle.getPropertyValue('--surface-solid').trim() || pStyle.getPropertyValue('--card').trim();
+          const text = pStyle.getPropertyValue('--text').trim();
+          const root = document.documentElement.style;
+          if (brand) root.setProperty('--primary', brand);
+          if (bg) root.setProperty('--bg', bg);
+          if (card) root.setProperty('--card', card);
+          if (text) root.setProperty('--text', text);
+        }
+      } catch (e) {}
+    }
+    syncThemeFromParent();
+
+    // زر الرجوع الفوري
+    function goBack() {
+      if (window.parent && window.parent !== window && typeof window.parent.closePortfolioOverlay === 'function') {
+        window.parent.closePortfolioOverlay();
+      } else {
+        window.location.href = 'index.html';
+      }
+    }
+
     function renderProjects(category, btn) {
       if (btn) {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
