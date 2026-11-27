@@ -924,7 +924,7 @@
               </div>
             </div>
             <div class="hero-actions">
-              <a href="portfolio.html" class="btn" style="background:rgba(201,162,75,0.22);color:#ffffff;border:1.5px solid #c9a24b;text-decoration:none;">عن المهندس وأعمالي</a>
+           <button type="button" onclick="openPortfolioOverlay()" class="btn" style="background:rgba(201,162,75,0.22);color:#ffffff;border:1.5px solid #c9a24b;cursor:pointer;">عن المهندس وأعمالي</button>
               <button type="button" class="btn" style="background:#ffffff;color:#1e2c3a;border:none;" onclick="openSection('projects')">المشاريع المحفوظة (<span id="home-proj-count">0</span>)</button>
               <button type="button" class="btn" style="background:rgba(255,255,255,0.16);color:#ffffff;border:1px solid rgba(255,255,255,0.65);backdrop-filter:blur(8px);" onclick="openSection('lectures')">مكتبة المحاضرات</button>
             </div>
@@ -2422,5 +2422,23 @@
       closeInstBtn.addEventListener('click', () => document.getElementById('install-modal').classList.remove('open'));
     }
   </script>
+  <!-- نافذة البورتفوليو الفورية -->
+<div id="portfolio-overlay" style="display:none;position:fixed;inset:0;z-index:99999;background:var(--bg,#eef2f7);">
+  <iframe id="portfolio-frame" src="" style="width:100%;height:100%;border:none;display:block;"></iframe>
+</div>
+<script>
+  function openPortfolioOverlay() {
+    var ov = document.getElementById('portfolio-overlay');
+    var fr = document.getElementById('portfolio-frame');
+    fr.src = 'portfolio.html';
+    ov.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+  function closePortfolioOverlay() {
+    var ov = document.getElementById('portfolio-overlay');
+    ov.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+</script>
 </body>
 </html>
