@@ -181,12 +181,19 @@
       box-shadow: 0 4px 14px rgba(0,0,0,0.04);
       display: flex;
       flex-direction: column;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+      border-color: var(--primary);
+    }
+    .project-thumb { position: relative; width: 100%; height: 190px; background: var(--bg); }
     .project-img {
       width: 100%;
-      height: 180px;
+      height: 100%;
       object-fit: cover;
-      background: var(--bg);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -194,9 +201,22 @@
       font-weight: 700;
       font-size: 0.9rem;
     }
-    .project-body { padding: 16px; flex: 1; }
+    .photo-count {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(15, 23, 42, 0.78);
+      color: #fff;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(4px);
+    }
+    .project-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
     .project-tag {
       display: inline-block;
+      align-self: flex-start;
       background: var(--bg);
       color: var(--primary);
       font-size: 0.75rem;
@@ -206,7 +226,113 @@
       margin-bottom: 8px;
     }
     .project-body h3 { font-size: 1.02rem; color: var(--text); margin-bottom: 6px; font-weight: 800; }
-    .project-body p { font-size: 0.86rem; color: var(--muted); }
+    .project-body p { font-size: 0.86rem; color: var(--muted); flex: 1; }
+    .open-hint {
+      margin-top: 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* نافذة المعرض (Modal) */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.82);
+      z-index: 999;
+      padding: 16px;
+      overflow-y: auto;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-box {
+      background: var(--card);
+      color: var(--text);
+      width: 100%;
+      max-width: 820px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+      margin: auto;
+    }
+    .modal-header {
+      background: var(--primary);
+      color: #fff;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .modal-header h3 { font-size: 1.05rem; font-weight: 800; }
+    .modal-close {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .modal-close:hover { background: #fff; color: var(--primary); }
+    .gallery-stage {
+      position: relative;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 260px;
+      max-height: 62vh;
+    }
+    .gallery-stage img {
+      max-width: 100%;
+      max-height: 62vh;
+      object-fit: contain;
+      display: block;
+    }
+    .gallery-empty { color: #cbd5e1; padding: 60px 20px; font-weight: 700; }
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.22);
+      color: #fff;
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+    }
+    .nav-arrow:hover { background: rgba(255,255,255,0.45); }
+    .nav-prev { right: 12px; }
+    .nav-next { left: 12px; }
+    .thumbs-strip {
+      display: flex;
+      gap: 8px;
+      padding: 12px 16px;
+      overflow-x: auto;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .thumbs-strip img {
+      width: 68px;
+      height: 52px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      opacity: 0.6;
+      border: 2px solid transparent;
+      flex-shrink: 0;
+    }
+    .thumbs-strip img.active { opacity: 1; border-color: var(--primary); }
+    .modal-info { padding: 18px 20px; }
+    .modal-info p { font-size: 0.92rem; color: var(--muted); margin-top: 6px; }
 
     footer { text-align: center; margin-top: 40px; color: var(--muted); font-size: 0.85rem; }
 
@@ -292,9 +418,29 @@
     </footer>
   </main>
 
+  <!-- نافذة معرض الصور -->
+  <div id="album-modal" class="modal-backdrop" onclick="if(event.target===this) closeAlbum()">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-title"></h3>
+        <button type="button" class="modal-close" onclick="closeAlbum()">×</button>
+      </div>
+      <div class="gallery-stage">
+        <button type="button" id="btn-prev" class="nav-arrow nav-prev" onclick="stepPhoto(-1)">❮</button>
+        <img id="modal-main-img" src="" alt="" style="display:none;" />
+        <div id="modal-empty" class="gallery-empty" style="display:none;">لا توجد صور مضافة لهذا الألبوم بعد</div>
+        <button type="button" id="btn-next" class="nav-arrow nav-next" onclick="stepPhoto(1)">❯</button>
+      </div>
+      <div id="modal-thumbs" class="thumbs-strip" style="display:none;"></div>
+      <div class="modal-info">
+        <span id="modal-tag" class="project-tag"></span>
+        <p id="modal-desc"></p>
+      </div>
+    </div>
+  </div>
+
   <script src="data/portfolio.js"></script>
   <script>
-    // سحب ألوان الثيم المختار من التطبيق الرئيسي تلقائياً
     function syncThemeFromParent() {
       try {
         if (window.parent && window.parent !== window) {
@@ -313,7 +459,6 @@
     }
     syncThemeFromParent();
 
-    // زر الرجوع الفوري
     function goBack() {
       if (window.parent && window.parent !== window && typeof window.parent.closePortfolioOverlay === 'function') {
         window.parent.closePortfolioOverlay();
@@ -322,37 +467,118 @@
       }
     }
 
+    let currentItems = [];
+    let activeAlbumImages = [];
+    let activePhotoIdx = 0;
+
+    function getItemImages(item) {
+      if (Array.isArray(item.images) && item.images.length > 0) return item.images;
+      if (item.image) return [item.image];
+      return [];
+    }
+
     function renderProjects(category, btn) {
       if (btn) {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
       }
       const container = document.getElementById('projects-container');
-      let items = [];
       if (category === 'all') {
-        items = [
+        currentItems = [
           ...(PORTFOLIO_DATA.design || []),
           ...(PORTFOLIO_DATA.execution || []),
           ...(PORTFOLIO_DATA.finishing || []),
           ...(PORTFOLIO_DATA.training || [])
         ];
       } else {
-        items = PORTFOLIO_DATA[category] || [];
+        currentItems = PORTFOLIO_DATA[category] || [];
       }
 
-      container.innerHTML = items.map(item => `
-        <article class="project-card">
-          ${item.image
-            ? `<img src="${item.image}" alt="${item.title}" class="project-img" />`
-            : `<div class="project-img">مساحة مخصصة لصورة المشروع</div>`
-          }
-          <div class="project-body">
-            <span class="project-tag">${item.tag}</span>
-            <h3>${item.title}</h3>
-            <p>${item.desc}</p>
-          </div>
-        </article>
-      `).join('');
+      container.innerHTML = currentItems.map((item, idx) => {
+        const imgs = getItemImages(item);
+        const cover = imgs[0] || '';
+        const countBadge = imgs.length > 0 ? `<span class="photo-count">📷 ${imgs.length} ${imgs.length === 1 ? 'صورة' : 'صور'}</span>` : '';
+        return `
+          <article class="project-card" onclick="openAlbum(${idx})">
+            <div class="project-thumb">
+              ${cover
+                ? `<img src="${cover}" alt="${item.title}" class="project-img" />`
+                : `<div class="project-img">مساحة مخصصة لصورة الغلاف</div>`
+              }
+              ${countBadge}
+            </div>
+            <div class="project-body">
+              <span class="project-tag">${item.tag}</span>
+              <h3>${item.title}</h3>
+              <p>${item.desc}</p>
+              <div class="open-hint">اضغط لعرض الألبوم والتفاصيل ←</div>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function openAlbum(idx) {
+      const item = currentItems[idx];
+      if (!item) return;
+      activeAlbumImages = getItemImages(item);
+      activePhotoIdx = 0;
+
+      document.getElementById('modal-title').textContent = item.title;
+      document.getElementById('modal-tag').textContent = item.tag;
+      document.getElementById('modal-desc').textContent = item.desc;
+
+      updateGalleryView();
+      document.getElementById('album-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function updateGalleryView() {
+      const mainImg = document.getElementById('modal-main-img');
+      const emptyMsg = document.getElementById('modal-empty');
+      const prevBtn = document.getElementById('btn-prev');
+      const nextBtn = document.getElementById('btn-next');
+      const thumbs = document.getElementById('modal-thumbs');
+
+      if (activeAlbumImages.length === 0) {
+        mainImg.style.display = 'none';
+        emptyMsg.style.display = 'block';
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+        thumbs.style.display = 'none';
+        return;
+      }
+
+      emptyMsg.style.display = 'none';
+      mainImg.style.display = 'block';
+      mainImg.src = activeAlbumImages[activePhotoIdx];
+
+      const hasMany = activeAlbumImages.length > 1;
+      prevBtn.style.display = hasMany ? 'block' : 'none';
+      nextBtn.style.display = hasMany ? 'block' : 'none';
+      thumbs.style.display = hasMany ? 'flex' : 'none';
+
+      if (hasMany) {
+        thumbs.innerHTML = activeAlbumImages.map((src, i) => `
+          <img src="${src}" class="${i === activePhotoIdx ? 'active' : ''}" onclick="selectPhoto(${i})" />
+        `).join('');
+      }
+    }
+
+    function stepPhoto(delta) {
+      if (activeAlbumImages.length < 2) return;
+      activePhotoIdx = (activePhotoIdx + delta + activeAlbumImages.length) % activeAlbumImages.length;
+      updateGalleryView();
+    }
+
+    function selectPhoto(i) {
+      activePhotoIdx = i;
+      updateGalleryView();
+    }
+
+    function closeAlbum() {
+      document.getElementById('album-modal').classList.remove('open');
+      document.body.style.overflow = '';
     }
 
     renderProjects('all');
