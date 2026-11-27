@@ -34,21 +34,21 @@ const PORTFOLIO_DATA = {
       title: "أعمال متدربي دورة ETABS",
       desc: "نماذج تحليل وتصميم إنشائي ومخططات من إنجاز المهندسين المتدربين في دورة ETABS.",
       tag: "أعمال المتدربين - ETABS",
-      images: [
-        "images/etabs-students/1.jpg",
-        "images/etabs-students/2.jpg",
-        "images/etabs-students/3.jpg",
-        "images/etabs-students/4.jpg",
-        "images/etabs-students/5.jpg",
-        "images/etabs-students/6.jpg",
-        "images/etabs-students/7.jpg",
-        "images/etabs-students/8.jpg",
-        "images/etabs-students/9.jpg",
-        "images/etabs-students/10.jpg",
-        "images/etabs-students/11.jpg",
-        "images/etabs-students/12.jpg",
-        "images/etabs-students/13.jpg",
-        "images/etabs-students/14.jpg"
+     images: [
+        "images/etabs-students/1.JPG",
+        "images/etabs-students/2.JPG",
+        "images/etabs-students/3.JPG",
+        "images/etabs-students/4.JPG",
+        "images/etabs-students/5.JPG",
+        "images/etabs-students/6.JPG",
+        "images/etabs-students/7.JPG",
+        "images/etabs-students/8.JPG",
+        "images/etabs-students/9.JPG",
+        "images/etabs-students/10.JPG",
+        "images/etabs-students/11.JPG",
+        "images/etabs-students/12.JPG",
+        "images/etabs-students/13.JPG",
+        "images/etabs-students/14.JPG"
       ]
     },
     {
